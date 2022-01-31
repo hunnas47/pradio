@@ -33,7 +33,7 @@ mpv
 ```sh
 git clone https://github.com/hunnas47/pradio.git
 cd pradio
-cp pradio/ /usr/local/bin/pradio
+sudo cp pradio /usr/local/bin/pradio
 sudo chmod +x /usr/local/bin/pradio
 ```
 
@@ -43,7 +43,7 @@ sudo chmod +x /usr/local/bin/pradio
 ```sh
 git clone https://github.com/hunnas47/pradio.git
 cd pradio
-cp pradio/ /usr/local/bin/pradio
+cp pradio /usr/local/bin/pradio
 sudo chmod +x /usr/local/bin/pradio
 ```
 ## Uninstall
