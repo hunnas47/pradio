@@ -1,0 +1,71 @@
+#!/bin/bash
+
+## Dependencies = mpv
+
+main(){
+	mpv http://stream.peaceradio.com:8000/high
+}
+
+quran(){
+	mpv http://stream.peaceradio.com:8000/quran/high
+}
+
+###
+## COLOR VARIABLES
+###
+
+green='\e[32m'
+red='\e[31m'
+blue='\e[34m'
+clear='\e[0m'
+
+###
+## COLOR FUNCTIONS
+###
+
+ColorGreen(){
+	echo -ne $green$1$clear
+}
+
+ColorBlue(){
+	echo -ne $blue$1$clear
+}
+
+
+###
+##  RADIO MENU
+###
+
+menu() {
+
+echo -ne "
+                                                                                                      
+█ ▄▄  ▄███▄   ██   ▄█▄    ▄███▄       █▄▄▄▄ ██   ██▄   ▄█ ████▄ 
+█   █ █▀   ▀  █ █  █▀ ▀▄  █▀   ▀      █  ▄▀ █ █  █  █  ██ █   █ 
+█▀▀▀  ██▄▄    █▄▄█ █   ▀  ██▄▄        █▀▀▌  █▄▄█ █   █ ██ █   █ 
+█     █▄   ▄▀ █  █ █▄  ▄▀ █▄   ▄▀     █  █  █  █ █  █  ▐█ ▀████ 
+ █    ▀███▀      █ ▀███▀  ▀███▀         █      █ ███▀   ▐       
+  ▀             █                      ▀      █                 
+               ▀                             ▀"Tune 2 Reality"                                                                                                                      
+
+
+$(ColorGreen '1)') Main Radio Station
+$(ColorGreen '2)') Quran Radio Station
+$(ColorGreen '0)') Exit
+$(ColorBlue 'Choose an Option:') "
+
+
+	read a
+	case $a in
+	
+	1) main ; menu;;
+	2) quran ; menu;;
+	0) exit 0 ;;
+	*) echo -e $red"Wrong option."$clear;
+WrongCommand;;
+
+esac
+
+}
+menu
+
