@@ -1,12 +1,31 @@
 #!/bin/bash
 
+# Check if mpv is installed
+if ! command -v mpv &> /dev/null; then
+    echo -e $red"mpv is not installed. Please install it to use this script."$clear
+    exit 1
+fi
+
+# Timer function
+start_timer() {
+    start_time=$(date +%s)
+}
+
+update_timer() {
+    local current_time
+    current_time=$(date +%s)
+    elapsed=$((current_time - start_time))
+}
+
 # Play the main radio station
 play_main_station() {
+    start_timer
     mpv http://stream.peaceradio.com:8000/high
 }
 
 # Play the Quran radio station
 play_quran_station() {
+    start_timer
     mpv http://stream.peaceradio.com:8000/quran/high
 }
 
@@ -14,6 +33,7 @@ play_quran_station() {
 green='\e[32m'
 red='\e[31m'
 blue='\e[34m'
+cyan='\e[36m'
 clear='\e[0m'
 
 # Color functions
@@ -25,8 +45,13 @@ color_blue() {
     echo -ne $blue$1$clear
 }
 
+color_cyan() {
+    echo -ne $cyan$1$clear
+}
+
 # Radio menu
 menu() {
+    clear
     echo -ne "
                                                                                                       
 █ ▄▄  ▄███▄   ██   ▄█▄    ▄███▄       █▄▄▄▄ ██   ██▄   ▄█ ████▄ 
@@ -47,8 +72,14 @@ menu() {
     case $option in
         1) play_main_station ;;
         2) play_quran_station ;;
-        0) exit 0 ;;
-        *) echo -e $red"Wrong option."$clear ;;
+        0)
+            update_timer
+            clear
+            echo -e "\n$(color_cyan "Elapsed Time: $((elapsed / 60))m $((elapsed % 60))s")"
+            echo -e "\nExiting..."
+            exit 0
+            ;;
+        *) echo -e $red"Invalid option. Please try again."$clear; sleep 2 ;;
     esac
 
     menu
