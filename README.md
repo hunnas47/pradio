@@ -7,7 +7,7 @@
 </div>
 
 <br>
-<p align="center">A cli tool to stream Peace Radio in malayalam</p>
+<p align="center">A cli tool to stream Peace Radio</p>
 
 ##
 
